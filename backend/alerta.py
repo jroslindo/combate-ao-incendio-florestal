@@ -1,5 +1,10 @@
 #foi utilizado crontab para execuçao desse algoritmo
 
+class aux_class():
+    def __init__(self):
+        self.incendio = None
+        self.temperatura = None
+
 class matriz_sensores():
     def __init__(self):
         self.matriz_sensor = []
@@ -18,7 +23,10 @@ matriz = matriz_sensores()
 qtt_incendio = 0
 
 for i in respostas_banco:
-    matriz.matriz_sensor.append([i["incendio"], i["temperatura"]])
+    aux = aux_class()
+    aux.incendio = i["incendio"]
+    aux.temperatura = i["temperatura"]
+    matriz.matriz_sensor.append(aux.__dict__)
 
     if i["incendio"] == "true":
         qtt_incendio+=1

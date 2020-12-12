@@ -2,7 +2,7 @@
   <mat-card-header>
     <mat-card-title>Painel de Monitoramento dos Sensores Florestais</mat-card-title>
     <mat-card-actions>
-      <button mat-button>
+      <button mat-button (click)="buscar()">
         <mat-icon aria-hidden="false">refresh</mat-icon>
       </button>
     </mat-card-actions>
@@ -10,20 +10,31 @@
 </mat-card>
 
 <mat-grid-list cols="4" rowHeight="4:2" style="background-color: #ddebdd;">
-  <mat-grid-tile>
-    <mat-card class="mat-card-default">
-      <mat-card-header>
-        <mat-card-title>Sensor 1</mat-card-title>
-      </mat-card-header>
-      <mat-card-content>
-        <mat-icon aria-hidden="false">wb_sunny {{temperatura}}</mat-icon>
-      </mat-card-content>
-      <mat-card-content>
-        <mat-icon aria-hidden="false">local_fire_department {{fumaca}}</mat-icon>
-      </mat-card-content>
-    </mat-card>
-  </mat-grid-tile>
-  <mat-grid-tile>
+
+  <div *ngFor="let item of lista_sensor; index as i; trackBy: i">
+    <mat-grid-tile>
+      <mat-card class="mat-card-default">
+        <mat-card-header>
+          <mat-card-title>Sensor {{i}}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div>
+            <mat-icon aria-hidden="false">wb_sunny</mat-icon>
+            <label style="margin-left: 20px; font-size: x-large;">{{item.temperatura}}ºC</label>
+          </div>
+        </mat-card-content>
+        <mat-card-content>          
+          <div>
+            <mat-icon aria-hidden="false">local_fire_department {{item.incendio}}</mat-icon>
+            <label style="margin-left: 20px; font-size: x-large;">{{item.incendio}}</label>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </div>
+
+
+  <!-- <mat-grid-tile>
     <mat-card class="mat-card-default">
       <mat-card-header>
         <mat-card-title>Sensor 2</mat-card-title>
@@ -218,4 +229,4 @@
       </mat-card-content>
     </mat-card>
   </mat-grid-tile>
-</mat-grid-list>
+</mat-grid-list> -->

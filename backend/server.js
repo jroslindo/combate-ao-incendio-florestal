@@ -1,6 +1,8 @@
 var MongoClient = require('mongodb').MongoClient;
 const express = require('express')
+var cors = require('cors')
 const app = express()
+app.use(cors())
 
 var url = "mongodb://localhost:27017/";
 
