@@ -1,9 +1,14 @@
 const aedes = require('aedes')()
 var MongoClient = require('mongodb').MongoClient;
+
+
+
+/**VARIAVEIS GLOBAIS */
 var url = "mongodb://localhost:27017/";
 const server = require('net').createServer(aedes.handle)
 const port = 1883
-const regex = /(\d*\/false)|(\d*\/true)/gm;
+const regex = /(\d*\/\d{2}\/false)|(\d*\/\d{2}\/true)/gm;
+/**---------------- */
 
 
 aedes.on('publish', async function (packet, client) {
@@ -16,7 +21,8 @@ aedes.on('publish', async function (packet, client) {
 
         let mensagem_final = {};
         mensagem_final.id = mensagem[0];
-        mensagem_final.incendio = mensagem[1];
+        mensagem_final.temperatura = mensagem[1];
+        mensagem_final.incendio = mensagem[2];
 
         console.log(mensagem_final);
 
@@ -35,6 +41,7 @@ aedes.on('publish', async function (packet, client) {
     }
 
 });
+
 
 
 server.listen(port, function () {
